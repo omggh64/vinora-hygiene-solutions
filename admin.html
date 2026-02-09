@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinora Admin Panel</title>
+
+<style>
+body{
+  font-family:Segoe UI,Arial;
+  background:#f4fbf9;
+  margin:0;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  color:#004d40;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+  background:white;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #ddd;
+  text-align:center;
+}
+th{
+  background:#004d40;
+  color:white;
+}
+button{
+  padding:8px 14px;
+  background:#ff5252;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+button:hover{opacity:.85}
+</style>
+</head>
+
+<body>
+
+<h1>🧾 Vinora Admin – Order List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Product</th>
+      <th>Qty</th>
+      <th>Amount</th>
+      <th>Payment</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="orderTable"></tbody>
+</table>
+
+<script>
+function loadOrders(){
+  let orders = JSON.parse(localStorage.getItem("vinoraOrders")) || [];
+  let html = "";
+
+  orders.forEach((o,i)=>{
+    html += `
+      <tr>
+        <td>${o.id}</td>
+        <td>${o.product}</td>
+        <td>${o.qty}</td>
+        <td>₹${o.amount}</td>
+        <td>${o.payment}</td>
+        <td>
+          <button onclick="deleteOrder(${i})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("orderTable").innerHTML = html;
+}
+
+function deleteOrder(index){
+  let orders = JSON.parse(localStorage.getItem("vinoraOrders")) || [];
+  orders.splice(index,1);
+  localStorage.setItem("vinoraOrders", JSON.stringify(orders));
+  loadOrders();
+}
+
+// page load par orders dikhao
+loadOrders();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinora Hygiene Solutions | Official Store</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    :root { --primary: #004d40; --accent: #ff9800; --bg: #f4fbf9; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; }
+    header { background: var(--primary); color: white; text-align: center; padding: 25px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: white; border-radius: 15px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
+    .card:hover { transform: translateY(-5px); }
+    .card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 10px; }
+    .price { font-size: 22px; color: var(--primary); font-weight: bold; margin: 10px 0; }
+    .qty { width: 70px; padding: 8px; border-radius: 5px; border: 1px solid #ccc; text-align: center; margin-bottom: 15px; }
+    button { width: 100%; padding: 12px; margin-top: 8px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; color: white; }
+    .btn-upi { background: #1976d2; }
+    .btn-cod { background: var(--accent); }
+    #addressOverlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center; }
+    .form-box { background:white; padding:25px; border-radius:15px; width:90%; max-width:400px; max-height: 90vh; overflow-y: auto; }
+    .form-box input, .form-box textarea { width:100%; padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px; box-sizing: border-box; }
+    .admin-section { margin-top: 40px; background: white; padding: 20px; border-radius: 15px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Vinora Hygiene Solutions</h1>
+    <p>Premium Quality | Direct Delivery</p>
+</header>
+
+<div class="container">
+    <section class="products">
+        <div class="card">
+            <img src="images/aura-3kg.png">
+            <h3>Aura Surf Powder 3KG</h3>
+            <div class="price">₹200</div>
+            <input class="qty" type="number" id="q1" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(1,'Aura Surf Powder 3KG',200,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(1,'Aura Surf Powder 3KG',200,'COD')">Order via COD</button>
+        </div>
+        <div class="card">
+            <img src="images/Aura-Surf_liquid.jpg">
+            <h3>Aura Surf Liquid</h3>
+            <div class="price">₹129</div>
+            <input class="qty" type="number" id="q2" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(2,'Aura Surf Liquid',129,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(2,'Aura Surf Liquid',129,'COD')">Order via COD</button>
+        </div>
+        <div class="card">
+            <img src="images/Aura-Surf-Powder.jpg">
+            <h3>Aura Surf Powder 1KG</h3>
+            <div class="price">₹75</div>
+            <input class="qty" type="number" id="q3" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(3,'Aura Surf Powder 1KG',75,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(3,'Aura Surf Powder 1KG',75,'COD')">Order via COD</button>
+        </div>
+        <div class="card">
+            <img src="images/dish-wash.jpg">
+            <h3>Dish Wash Liquid</h3>
+            <div class="price">₹99</div>
+            <input class="qty" type="number" id="q4" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(4,'Dish Wash Liquid',99,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(4,'Dish Wash Liquid',99,'COD')">Order via COD</button>
+        </div>
+        <div class="card">
+            <img src="images/soap.jpg">
+            <h3>Bath Soap</h3>
+            <div class="price">₹59</div>
+            <input class="qty" type="number" id="q5" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(5,'Bath Soap',59,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(5,'Bath Soap',59,'COD')">Order via COD</button>
+        </div>
+        <div class="card">
+            <img src="images/Toilet_cleaner.jpg">
+            <h3>Toilet Cleaner</h3>
+            <div class="price">₹139</div>
+            <input class="qty" type="number" id="q6" value="1" min="1">
+            <button class="btn-upi" onclick="initOrder(6,'Toilet Cleaner',139,'UPI')">Order via UPI</button>
+            <button class="btn-cod" onclick="initOrder(6,'Toilet Cleaner',139,'COD')">Order via COD</button>
+        </div>
+    </section>
+
+    <div class="admin-section">
+        <h2>🚚 My Orders & Tracking</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Track ID</th>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Bill</th>
+                </tr>
+            </thead>
+            <tbody id="trackBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="addressOverlay">
+    <div class="form-box">
+        <h3 id="formTitle">Delivery Details</h3>
+        <div id="calcDetails" style="background:#f9f9f9; padding:10px; font-size:13px; border-radius:8px; margin-bottom:10px;"></div>
+        <input type="text" id="cName" placeholder="Full Name">
+        <input type="tel" id="cPhone" placeholder="WhatsApp Number">
+        <textarea id="cAddress" placeholder="Full Address with Pincode" rows="3"></textarea>
+        <button id="finalBtn" style="background:var(--primary)" onclick="placeOrder()">Confirm Order</button>
+        <button onclick="document.getElementById('addressOverlay').style.display='none'" style="background:#ddd; color:black; margin-top:5px;">Cancel</button>
+    </div>
+</div>
+
+<script>
+let tempOrder = {};
+const UPI_ID = "vinorahygienesolutions@iob";
+
+function initOrder(id, name, price, method) {
+    let qty = parseInt(document.getElementById("q"+id).value);
+    let baseTotal = price * qty;
+    let finalPayNow = baseTotal;
+    let summary = "";
+
+    if (method === 'COD') {
+        let totalWithFees = baseTotal + 10; 
+        finalPayNow = 30; 
+        let balance = totalWithFees - finalPayNow; 
+        summary = `<b>Price:</b> ₹${baseTotal}<br>` +
+                  `<b>COD Fee:</b> +₹10<br>` +
+                  `<b>Total Amount:</b> ₹${totalWithFees}<br>` +
+                  `<b style="color:blue">Advance (Pay Now via UPI): ₹${finalPayNow}</b><br>` +
+                  `<b>Pending at Delivery:</b> ₹${balance}`;
+    } else {
+        summary = `<b>Total Price:</b> ₹${baseTotal}<br>` +
+                  `<b style="color:green">Full UPI Payment: ₹${finalPayNow}</b>`;
+    }
+
+    tempOrder = { 
+        name, qty, total: (method==='COD'?baseTotal+10:baseTotal), 
+        method, payNow: finalPayNow, 
+        trackId: "VNR"+Math.floor(1000+Math.random()*9000) 
+    };
+    
+    document.getElementById("calcDetails").innerHTML = summary;
+    document.getElementById("addressOverlay").style.display = "flex";
+}
+
+function placeOrder() {
+    const name = document.getElementById("cName").value;
+    const phone = document.getElementById("cPhone").value;
+    const addr = document.getElementById("cAddress").value;
+    if(!name||!phone||!addr){Swal.fire('Error','Details bhariye!','error'); return;}
+
+    let upiUrl = `upi://pay?pa=${UPI_ID}&pn=VinoraHygiene&am=${tempOrder.payNow}&cu=INR&tn=Order_${tempOrder.trackId}`;
+    let waMsg = `🧾 *NEW ORDER* %0A*Track ID:* ${tempOrder.trackId}%0A*Product:* ${tempOrder.name}%0A*Qty:* ${tempOrder.qty}%0A*Total Amount:* ₹${tempOrder.total}%0A*Payment Method:* ${tempOrder.method}%0A*Advance Paid:* ₹${tempOrder.payNow}%0A%0A*Customer:* ${name}%0A*Address:* ${addr}`;
+
+    let history = JSON.parse(localStorage.getItem("vHistory")||"[]");
+    history.push({...tempOrder, status:'Confirmed', date:new Date().toLocaleDateString()});
+    localStorage.setItem("vHistory", JSON.stringify(history));
+
+    Swal.fire({title:'Order Processing',text:`Opening Payment for ₹${tempOrder.payNow}...`,icon:'info',timer:2000,showConfirmButton:false})
+    .then(()=>{
+        if(/Mobi|Android/i.test(navigator.userAgent)){
+            window.location.href = upiUrl;
+        } else {
+            Swal.fire('Info','UPI payment only works on mobile devices. Open this page on your phone to pay.','info');
+        }
+        setTimeout(()=>{ window.open("https://wa.me/918076659001?text="+waMsg,"_blank"); location.reload(); },1500);
+    });
+}
+
+function loadHistory(){
+    let history = JSON.parse(localStorage.getItem("vHistory")||"[]");
+    let html = "";
+    history.reverse().forEach(o=>{
+        html += `<tr>
+            <td><b>${o.trackId}</b></td>
+            <td>${o.name}</td>
+            <td><span style="background:#e0f2f1;padding:3px 8px;border-radius:5px;font-size:12px;">${o.status}</span></td>
+            <td><button onclick="Swal.fire('Bill','Item: ${o.name}\\nTotal: ₹${o.total}\\nMethod: ${o.method}','info')" style="padding:4px;font-size:10px;width:auto;background:#666">View</button></td>
+        </tr>`;
+    });
+    document.getElementById("trackBody").innerHTML = html||"<tr><td colspan='4'>No orders yet</td></tr>";
+}
+
+loadHistory();
+</script>
+</body>
+</html>
